@@ -49,3 +49,12 @@ INNER JOIN professors ON professors.professor_id = courses.professor_id;
 SELECT courses.course_name AS course_with_students
 FROM courses
 INNER JOIN students ON students.student_id = courses.course_id;
+
+--Updating a Students email
+UPDATE students
+SET email = 'magicbus@gmail.com'
+where student_id = 5
+
+--Deleting a Student from one Course
+DELETE FROM enrollments
+WHERE student_id = 3 AND course_id = 3
