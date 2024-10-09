@@ -41,3 +41,21 @@ VALUES(1, 3, 2),
 (4, 2, 6),
 (5, 4, 3),
 (5, 5, 1);
+
+--Retrieving the Name and Quantity of all Products
+SELECT product_name, stock_quantity
+FROM products
+
+--Retriving the Names and Quantities of Products on 1 of the Orders
+SELECT products.product_name, order_items.quantity
+FROM products
+JOIN order_items ON products.id = order_items.product_id
+JOIN orders ON order_items.order_id = orders.id
+WHERE orders.id = 3
+
+--Retrieving all the Orders for one specific customer
+SELECT orders.id AS order_id, order_items.product_id, order_items.quantity
+FROM orders
+JOIN order_items ON orders.id = order_items.order_id
+JOIN customers ON orders.customer_id = customers.id
+WHERE customers.id = 1
