@@ -1,3 +1,4 @@
+--Creating the Tables
 CREATE TABLE students (student_id SERIAL PRIMARY KEY, first_name TEXT, last_name TEXT, email TEXT, school_enrollment_date DATE)
 
 CREATE TABLE professors (professor_id SERIAL PRIMARY KEY, first_name TEXT, last_name TEXT, department TEXT)
@@ -32,3 +33,19 @@ VALUES (1, 3, 'September 6, 2022'),
 (3, 1, 'June 3, 2007'),
 (3, 3, 'September 2, 2007'),
 (4, 2, 'September 5, 2019');
+
+--Retrieving Full Name
+SELECT students.first_name || ' ' || students.last_name AS stud_in_shakespeare
+FROM students
+INNER JOIN enrollments ON students.student_id = enrollments.student_id
+WHERE enrollments.course_id = 2;
+
+--Retrieving Course List with Professor's Full Name
+SELECT courses.course_name, professors.first_name || ' ' || professors.last_name AS prof_full_name
+FROM courses
+INNER JOIN professors ON professors.professor_id = courses.professor_id;
+
+--Retrieving Courses with students enrolled
+SELECT courses.course_name AS course_with_students
+FROM courses
+INNER JOIN students ON students.student_id = courses.course_id;
