@@ -5,7 +5,7 @@ CREATE TABLE customers (id SERIAL PRIMARY KEY, first_name TEXT, last_name TEXT, 
 
 CREATE TABLE orders (id SERIAL PRIMARY KEY, customer_id INT REFERENCES customers(id), order_date DATE)
 
-CREATE TABLE order_items (order_id INT REFERENCES orders(id), product_id INT REFERENCES products(id), quantity INT, PRIMARY KEY (order_id, product_id)
+CREATE TABLE order_items (order_id INT REFERENCES orders(id), product_id INT REFERENCES products(id), quantity INT, PRIMARY KEY (order_id, product_id))
 
 --Inserting the Data
 INSERT INTO products(product_name, price, stock_quantity)
@@ -59,3 +59,19 @@ FROM orders
 JOIN order_items ON orders.id = order_items.order_id
 JOIN customers ON orders.customer_id = customers.id
 WHERE customers.id = 1
+
+--Updating the Stock Quantity after Order 3 is placed
+UPDATE products
+SET stock_quantity = GREATEST(0, stock_quantity - (
+    SELECT quantity
+    FROM order_items
+    WHERE order_items.product_id = products.id AND order_items.order_id = 1
+))
+WHERE id IN (SELECT product_id FROM order_items WHERE order_id = 3)
+
+--Deleting Order 2
+DELETE FROM order_items
+WHERE order_id = 2;
+
+DELETE FROM orders
+WHERE id = 2;
