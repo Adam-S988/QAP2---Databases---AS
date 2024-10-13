@@ -16,9 +16,9 @@ VALUES ('Plain Bagel', 1.95, 90),
 ('Chicken Wrap', 7.99, 25);
 
 INSERT INTO customers(first_name, last_name, email)
-VALUES ('Gretchen', 'Weiners', 'sofetch@gmail.com'),
+VALUES ('Lacey', 'Chabert', 'sofetch@gmail.com'),
 ('Tina', 'Fey', 'norbury@gmail.com'),
-('Amy', 'Adams', 'burnbook04@gmail.com'),
+('Rachel', 'McAdams', 'burnbook04@gmail.com'),
 ('Amanda', 'Seyfried', 'fifthsense@gmail.com'),
 ('Amy', 'Poehler', 'cool.mom@gmail.com');
 
